@@ -1,15 +1,13 @@
-require './app/models/link'
-
-ENV['RACK_ENV'] = 'test'
+ENV["RACK_ENV"] = "test"
 
 require './app/app'
+require './app/models/link'
 require 'capybara/rspec'
 require 'capybara'
 require 'rspec'
+require 'database_cleaner'
 
 Capybara.app = BookmarkManager
-
-require 'database_cleaner'
 
 RSpec.configure do |config|
   config.before(:suite) do
