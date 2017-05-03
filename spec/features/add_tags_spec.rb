@@ -4,10 +4,10 @@ feature 'Creating tags' do
     visit '/links/new'
     fill_in :url, with:  "http://makersacademy.com"
     fill_in :title, with: "Makers Academy"
-    fill_in :tags, with: 'search_engine'
+    fill_in :tags, with: "Ruby"
     click_button 'Add Link'
     within 'ul#links' do
-      expect(page).to have_content 'search_engine'
+      expect(page).to have_content 'Ruby'
     end
   end
 end
