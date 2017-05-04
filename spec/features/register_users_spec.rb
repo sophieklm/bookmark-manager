@@ -12,6 +12,8 @@ feature 'Registers users' do
     fill_in 'password_confirmation', with: 'pssword'
     click_button 'Submit'
     expect { signup }.to change(User, :count).by(0)
+    expect(current_path).to eq '/signup'
+    expect(page).to have_content("Password and confirmation do not match")
   end
 end
 

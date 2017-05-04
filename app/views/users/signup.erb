@@ -1,3 +1,6 @@
+<% if flash[:password_error] %>
+  <%= flash[:password_error]%>
+<% end %>
 <form action = '/signup' method = 'post'>
   Please insert your email:
   <input type = 'text' name = 'email'>
