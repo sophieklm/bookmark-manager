@@ -1,4 +1,6 @@
-<p>Welcome to your bookmark manager, <%= @user_email%>!</p>
+<% if current_user %>
+<p>Welcome to your bookmark manager, <%= @current_user.email%>!</p>
+<% end %>
 
 <h1> Links </h1>
 <ul id='links'>
