@@ -4,7 +4,10 @@
   <li>
     Title: <%= link.title %>
     URL: <%= link.url %>
-    Tags: <%= link.tags.map(&:tag) %>
+    Tags:
+    <% link.tags.each do |tag| %>
+      <%= tag.tag %>
+    <%end%>
   </li>
   <% end %>
 </ul>
