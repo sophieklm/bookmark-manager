@@ -3,7 +3,11 @@ require 'sinatra/base'
 require_relative 'data_mapper_setup'
 
 class BookmarkManager < Sinatra::Base
+
+  enable :sessions
+
   get '/links' do
+    @user_email = session[:email]
     @links = Link.all
     erb :'links/index'
   end
@@ -25,6 +29,16 @@ class BookmarkManager < Sinatra::Base
     @tag = Tag.all(:tag => params[:tag])
     @tag_links = @tag.links
     erb :'links/tag'
+  end
+
+  get '/signup' do
+    erb :'users/signup'
+  end
+
+  post '/signup' do
+    user = User.create(email: params[:email], password: params[:password])
+    session[:email] = user.email
+    redirect to('/links')
   end
 
   run! if app_file == $0
