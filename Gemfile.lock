@@ -70,6 +70,8 @@ GEM
     hirb (0.7.3)
     json (1.8.6)
     json_pure (1.8.6)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
@@ -142,6 +144,7 @@ DEPENDENCIES
   data_mapper
   database_cleaner
   dm-postgres-adapter
+  launchy
   rake
   rspec
   rubocop

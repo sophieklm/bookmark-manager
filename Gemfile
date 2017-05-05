@@ -14,6 +14,7 @@ group :test do
   gem 'database_cleaner'
   gem 'capybara'
   gem 'rspec'
+  gem 'launchy'
   gem 'rubocop-rspec'
   gem 'rubocop'
   gem 'simplecov', require: false
