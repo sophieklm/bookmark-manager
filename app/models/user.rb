@@ -16,9 +16,18 @@ class User
   validates_format_of :email, as: :email_address
   validates_uniqueness_of :email, :message => "Email is already registered"
 
-  def password=(new_password)
-    @password = Password.create(new_password)
+  def password=(password)
+    @password = Password.create(password)
     self.password_hash = @password
+  end
+
+  def self.authenticate(email, password)
+    user = first(email: email)
+    if user && Password.new(user.password_hash) == password
+      user
+    else
+      nil
+    end
   end
 
 end

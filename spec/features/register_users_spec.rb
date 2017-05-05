@@ -6,7 +6,7 @@ feature 'Registers users' do
   end
   scenario 'user fills in password confirmation incorrectly' do
     expect { signup(password_confirmation: "error") }.to change(User, :count).by(0)
-    expect(current_path).to eq '/signup'
+    expect(current_path).to eq '/users/new'
     expect(page).to have_content("Password and confirmation do not match")
   end
   scenario 'user cannot sign up without email' do
@@ -23,7 +23,7 @@ feature 'Registers users' do
 end
 
 def signup(email: 'sophie@example.com', password: "password", password_confirmation: "password")
-  visit '/signup'
+  visit '/users/new'
   fill_in 'email', with: email
   fill_in 'password', with: password
   fill_in 'password_confirmation', with: password_confirmation
