@@ -11,9 +11,10 @@ class User
   attr_reader :password
   attr_accessor :password_confirmation
 
-  validates_confirmation_of :password
+  validates_confirmation_of :password, :message => "Password and confirmation do not match"
   validates_presence_of :email
   validates_format_of :email, as: :email_address
+  validates_uniqueness_of :email, :message => "Email is already registered"
 
   def password=(new_password)
     @password = Password.create(new_password)

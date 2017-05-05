@@ -11,11 +11,14 @@ feature 'Registers users' do
   end
   scenario 'user cannot sign up without email' do
     expect { signup(email: "") }.to change(User, :count).by(0)
-    expect(current_path).to eq '/signup'
   end
   scenario 'user cannot sign up with invalid email' do
     expect { signup(email: "invalid@email") }.to change(User, :count).by(0)
-    expect(current_path).to eq '/signup'
+  end
+  scenario 'user cannot sign up with already registered email address' do
+    signup
+    expect { signup }.to change(User, :count).by(0)
+    expect(page).to have_content("Email is already registered")
   end
 end
 
