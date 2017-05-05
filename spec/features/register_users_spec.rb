@@ -13,6 +13,10 @@ feature 'Registers users' do
     expect { signup(email: "") }.to change(User, :count).by(0)
     expect(current_path).to eq '/signup'
   end
+  scenario 'user cannot sign up with invalid email' do
+    expect { signup(email: "invalid@email") }.to change(User, :count).by(0)
+    expect(current_path).to eq '/signup'
+  end
 end
 
 def signup(email: 'sophie@example.com', password: "password", password_confirmation: "password")
