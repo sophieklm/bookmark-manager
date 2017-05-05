@@ -12,10 +12,3 @@ feature "Signing in" do
     expect(current_path).to eq '/sessions/new'
   end
 end
-
-def signin(email: 'sophie@example.com', password: "password", password_confirmation: "password")
-  visit '/sessions/new'
-  fill_in 'email', with: email
-  fill_in 'password', with: password
-  click_button 'Submit'
-end
