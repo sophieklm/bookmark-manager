@@ -5,13 +5,14 @@ class User
   include BCrypt
 
   property :id,       Serial
-  property :email,    String
+  property :email,    String, required: true
   property :password_hash, Text
 
   attr_reader :password
   attr_accessor :password_confirmation
 
   validates_confirmation_of :password
+  validates_presence_of :email
 
   def password=(new_password)
     @password = Password.create(new_password)
