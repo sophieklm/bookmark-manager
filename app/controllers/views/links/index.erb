@@ -1,0 +1,20 @@
+<h2> Links </h2>
+<ul id='links'>
+  <% @links.each do |link| %>
+  <li>
+    Title: <%= link.title %>
+    URL: <%= link.url %>
+    Tags:
+    <% link.tags.each do |tag| %>
+      <%= tag.tag %>
+    <%end%>
+  </li>
+  <% end %>
+</ul>
+
+<% if current_user %>
+<form method='post' action='/sessions'>
+  <input type='hidden' name='_method' value='delete'>
+  <input type='submit' value='Sign out'>
+</form>
+<% end %>
