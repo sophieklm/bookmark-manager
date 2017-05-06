@@ -15,4 +15,13 @@ class BookmarkManager < Sinatra::Base
     end
   end
 
+  get '/users/recover' do
+    erb :'/users/recover'
+  end
+
+  post '/users/recover' do
+    flash.next[:notice] = "Thanks, please check your inbox."
+    redirect to '/'
+  end
+
 end
