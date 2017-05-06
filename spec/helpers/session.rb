@@ -6,5 +6,5 @@ def signin(email: 'sophie@example.com', password: "password", password_confirmat
 end
 
 def signout
-  click_button 'Sign out'
+  click_button 'Sign Out'
 end

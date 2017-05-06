@@ -1,7 +1,7 @@
 class BookmarkManager < Sinatra::Base
 
   get '/users/new' do
-    erb :'users/new'
+    erb :'/users/new'
   end
 
   post '/users/new' do
@@ -11,8 +11,8 @@ class BookmarkManager < Sinatra::Base
       redirect to('/links')
     else
       flash.now[:errors] = user.errors.full_messages
-      erb :'users/new'
+      erb :'/users/new'
     end
   end
-  
+
 end

@@ -1,0 +1,22 @@
+<div class="nav">
+<% if current_user %>
+  <form method='post' action='/sessions'>
+    <input type='hidden' name='_method' value='delete'>
+    <input type='submit' value='Sign Out'>
+  </form>
+  <form action='/links/new'>
+    <input type='submit' value='Add New Link'>
+  </form>
+  <form action='/links'>
+    <input type='submit' value='View Links'>
+  </form>
+<% end %>
+<% if current_user == nil %>
+  <form action='/sessions/new'>
+    <input type='submit' value='Sign In'>
+  </form>
+  <form action='/users/new'>
+    <input type='submit' value='Sign Up'>
+  </form>
+<% end %>
+</div>
