@@ -1,4 +1,5 @@
 require 'bcrypt'
+require 'securerandom'
 
 class User
   include DataMapper::Resource
@@ -7,6 +8,7 @@ class User
   property :id,       Serial
   property :email,    String, required: true
   property :password_hash, Text
+  property :password_token, String, length: 60
 
   attr_reader :password
   attr_accessor :password_confirmation
@@ -28,6 +30,11 @@ class User
     else
       nil
     end
+  end
+
+  def generate_token
+    self.password_token = SecureRandom.hex
+    self.save
   end
 
 end

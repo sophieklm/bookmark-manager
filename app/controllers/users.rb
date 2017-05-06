@@ -20,8 +20,16 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/users/recover' do
+    user = User.first(email: params[:email])
+    if user
+      user.generate_token
+    end
     flash.next[:notice] = "Thanks, please check your inbox."
     redirect to '/'
+  end
+
+  get '/users/reset_password' do
+    "This token is no longer valid"
   end
 
 end

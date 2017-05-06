@@ -10,4 +10,7 @@ describe User do
     authenticate_user = User.authenticate(user.email, "error")
     expect(authenticate_user).to be_nil
   end
+  it 'saves a password recovery token when generated' do
+    expect{user.generate_token}.to change{user.password_token}
+  end
 end
