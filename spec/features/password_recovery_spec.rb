@@ -20,4 +20,10 @@ feature "Resetting Password" do
       expect(page).to have_content "This token is no longer valid"
     end
   end
+  scenario "user is asked for new password when token is valid" do
+    recover_password
+    visit("/users/reset_password?token=#{user.password_token}")
+    expect(page).to have_content("Please enter your new password")
+  end
+
 end

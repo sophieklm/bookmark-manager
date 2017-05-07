@@ -13,4 +13,20 @@ describe User do
   it 'saves a password recovery token when generated' do
     expect{user.generate_token}.to change{user.password_token}
   end
+  it 'saves password recovery token time' do
+    Timecop.freeze do
+      user.generate_token
+      expect(user.password_token_time).to eq Time.now
+    end
+  end
+  it 'finds user with valid token' do
+    user.generate_token
+    expect(User.find_by_valid_token(user.password_token)).to eq user
+  end
+  it 'does not return user when token invalid' do
+    user.generate_token
+    Timecop.travel(60 * 60 * 60) do
+      expect(User.find_by_valid_token(user.password_token)).to eq nil
+    end
+  end
 end

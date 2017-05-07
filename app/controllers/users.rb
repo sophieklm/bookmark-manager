@@ -29,7 +29,12 @@ class BookmarkManager < Sinatra::Base
   end
 
   get '/users/reset_password' do
-    "This token is no longer valid"
+    @user = User.find_by_valid_token(params[:token])
+    if @user
+      "Please enter your new password"
+    else
+      "This token is no longer valid"
+    end
   end
 
 end
