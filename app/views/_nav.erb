@@ -1,22 +1,14 @@
-<div class="nav">
+<div class="nav" id="user-links">
 <% if current_user %>
-  <form method='post' action='/sessions'>
+  <a><form id = "sign-out" class="button highlighted" method='post' action='/sessions'>
     <input type='hidden' name='_method' value='delete'>
     <input type='submit' value='Sign Out'>
-  </form>
-  <form action='/links/new'>
-    <input type='submit' value='Add New Link'>
-  </form>
-  <form action='/links'>
-    <input type='submit' value='View Links'>
-  </form>
+  </form></a>
+  <a href="/links/new" class="button highlighted"> Add New Link</a>
+  <a href="/links" class="button highlighted"> View Links</a>
 <% end %>
 <% if current_user == nil %>
-  <form action='/sessions/new'>
-    <input type='submit' value='Sign In'>
-  </form>
-  <form action='/users/new'>
-    <input type='submit' value='Sign Up'>
-  </form>
+  <a href="/sessions/new" class="button highlighted"> Sign In</a>
+  <a href="/users/new" class="button highlighted"> Sign Up</a>
 <% end %>
 </div>

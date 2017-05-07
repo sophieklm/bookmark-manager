@@ -1,9 +1,10 @@
 <h2> Links </h2>
+<div id='links-container'>
 <ul id='links'>
   <% @links.each do |link| %>
   <li>
     Title: <%= link.title %>
-    URL: <%= link.url %>
+    URL: <a class='title' href='<%= link.url %>'><%= link.url %></a>
     Tags:
     <% link.tags.each do |tag| %>
       <%= tag.tag %>
@@ -11,3 +12,4 @@
   </li>
   <% end %>
 </ul>
+</div>
