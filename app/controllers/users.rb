@@ -31,10 +31,17 @@ class BookmarkManager < Sinatra::Base
   get '/users/reset_password' do
     @user = User.find_by_valid_token(params[:token])
     if @user
-      "Please enter your new password"
+      session[:token] = params[:token]
+      erb :'users/reset_password'
     else
       "This token is no longer valid"
     end
+  end
+
+  patch '/users' do
+    user = User.find_by_valid_token(session[:token])
+    user.update(password: params[:password], password_confirmation: params[:password_confirmation])
+    redirect "/sessions/new"
   end
 
 end
