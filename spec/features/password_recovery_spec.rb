@@ -27,20 +27,28 @@ feature "Resetting Password" do
   end
   scenario "user can enter a new password when token valid" do
     recover_password
-    visit("/users/reset_password?token=#{user.password_token}")
-    fill_in :password, with: "password"
-    fill_in :password_confirmation, with: "password"
-    click_button "Submit"
+    set_password(password: "newpassword", password_confirmation: "newpassword")
     expect(page).to have_content("Sign In")
   end
 
   scenario "user can sign in after password reset" do
     recover_password
-    visit("/users/reset_password?token=#{user.password_token}")
-    fill_in :password, with: "newpassword"
-    fill_in :password_confirmation, with: "newpassword"
-    click_button "Submit"
+    set_password(password: "newpassword", password_confirmation: "newpassword")
     signin(email: user.email, password: "newpassword")
     expect(page).to have_content "Welcome to your bookmark manager, #{user.email}"
   end
+
+  scenario "checks password confirmation matches" do
+    recover_password
+    set_password(password: "password", password_confirmation: "otherpassword")
+    expect(page).to have_content("Password and confirmation do not match")
+  end
+
+  scenario "it resets token when password updated" do
+    recover_password
+    set_password(password: "newpassword", password_confirmation: "newpassword")
+    visit("/users/reset_password?token=#{user.password_token}")
+    expect(page).to have_content("This token is no longer valid")
+  end
+
 end
