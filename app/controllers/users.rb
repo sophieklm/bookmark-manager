@@ -1,3 +1,5 @@
+require './lib/send_recover_link.rb'
+
 class BookmarkManager < Sinatra::Base
 
   get '/users/new' do
@@ -23,6 +25,7 @@ class BookmarkManager < Sinatra::Base
     user = User.first(email: params[:email])
     if user
       user.generate_token
+      SendRecoverLink.call(user)
     end
     flash.next[:notice] = "Thanks, please check your inbox."
     redirect to '/'

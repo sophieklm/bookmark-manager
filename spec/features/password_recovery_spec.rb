@@ -2,6 +2,7 @@ feature "Resetting Password" do
   before do
     signup
     Capybara.reset!
+    allow(SendRecoverLink).to receive(:call)
   end
   let(:user) { User.first }
   scenario "user can see a password reset link" do
@@ -49,6 +50,11 @@ feature "Resetting Password" do
     set_password(password: "newpassword", password_confirmation: "newpassword")
     visit("/users/reset_password?token=#{user.password_token}")
     expect(page).to have_content("This token is no longer valid")
+  end
+
+  scenario "it calls SendRecoverLink service to send the link" do
+    expect(SendRecoverLink).to receive(:call).with(user)
+    recover_password
   end
 
 end
