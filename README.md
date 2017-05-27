@@ -1,5 +1,16 @@
 # Bookmark Manager
 
+Instructions
+-----------
+
+```
+$ git clone
+$ cd bookmark-manager
+$ bundle
+$ rackup
+```
+
+
 User Stories
 -----------
 
